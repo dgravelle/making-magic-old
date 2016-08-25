@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class SignupForm extends Component {
   render() {
@@ -13,6 +14,8 @@ class SignupForm extends Component {
         hintText="Password"
         type="password"
       />
+      <br />
+      <RaisedButton label="Signup" />
     </form>
   }
 }
