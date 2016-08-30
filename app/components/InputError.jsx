@@ -6,7 +6,7 @@ class InputError extends Component {
     super(props)
 
     this.state = {
-      message: this.props.errorMessage || 'Invalid input'
+      message: this.props.errorMessage || ''
     }
   }
 

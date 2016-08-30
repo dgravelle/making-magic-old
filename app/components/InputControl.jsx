@@ -9,12 +9,13 @@ class InputControl extends Component {
 
         this.state = {
             errorVisible: false,
-            errorMessage: 'invalid input',
+            errorMessage: null,
             valid: true,
             value: props.initialValue,
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     handleChange(e) {
@@ -24,10 +25,14 @@ class InputControl extends Component {
     }
 
     handleBlur(e) {
+        console.log(this.props);
         let valid = this.props.validate(e.target.value)
 
+        console.log(valid);
+
         this.setState({
-            errorVisible: valid.valid, errorMessage: valid.message
+            errorVisible: valid.valid,
+            errorMessage: valid.message
         });
     }
 
@@ -39,17 +44,19 @@ class InputControl extends Component {
 
         return <div>
             <TextField
-                className={classes} placeholder={this.props.placeholder}
+                id={this.props.id}
+                className={classes}
+                errorText={this.state.errorMessage}
+                placeholder={this.props.placeholder}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
                 type={this.props.type}
-                validate={this.props.validate}
                 value={this.state.value}
             />
-
+{/* 
             <InputError
                 visible={this.state.errorVisible} errorMessage={this.state.errorMessage}
-            />
+            /> */}
 
         </div>
     }

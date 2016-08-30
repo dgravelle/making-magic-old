@@ -28675,17 +28675,21 @@
 	        value: function handleSubmit() {}
 	    }, {
 	        key: 'validateEmail',
-	        value: function validateEmail() {
+	        value: function validateEmail(email) {
+	            var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+
 	            var response = {};
 
-	            if (this.state.email === '') {
-	                response.message = 'yo dont leave me hangin';
-	                response.valid = false;
+	            console.log(email.match(reg));
+
+	            if (email.match(reg)) {
+	                response.valid = true;
+	                response.message = null;
 
 	                return response;
 	            } else {
-	                response.valid = true;
-	                response.message = null;
+	                response.valid = false;
+	                response.message = 'please provide a valid email';
 
 	                return response;
 	            }
@@ -28695,16 +28699,24 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'form',
-	                null,
-	                _react2.default.createElement(_InputControl2.default, { placeholder: 'Email', type: 'email', value: this.state.email, onBlur: this.validateEmail() }),
+	                { name: 'signup' },
+	                _react2.default.createElement(_InputControl2.default, {
+	                    id: 'email',
+	                    placeholder: 'Email',
+	                    type: 'email',
+	                    validate: this.validateEmail
+	                }),
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement(_InputControl2.default, {
-	                    placeholder: 'Password'
+	                    id: 'password',
+	                    placeholder: 'Password',
+	                    type: 'password'
 	                }),
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement(_RaisedButton2.default, {
 	                    label: 'Signup',
-	                    onClick: 'handleSubmit()' })
+	                    onClick: this.handleSubmit
+	                })
 	            );
 	        }
 	    }]);
@@ -28767,12 +28779,13 @@
 
 	        _this.state = {
 	            errorVisible: false,
-	            errorMessage: 'invalid input',
+	            errorMessage: null,
 	            valid: true,
 	            value: props.initialValue
 	        };
 
 	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleBlur = _this.handleBlur.bind(_this);
 	        return _this;
 	    }
 
@@ -28786,10 +28799,14 @@
 	    }, {
 	        key: 'handleBlur',
 	        value: function handleBlur(e) {
+	            console.log(this.props);
 	            var valid = this.props.validate(e.target.value);
 
+	            console.log(valid);
+
 	            this.setState({
-	                errorVisible: valid.valid, errorMessage: valid.message
+	                errorVisible: valid.valid,
+	                errorMessage: valid.message
 	            });
 	        }
 	    }, {
@@ -28804,15 +28821,14 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(_TextField2.default, {
-	                    className: classes, placeholder: this.props.placeholder,
+	                    id: this.props.id,
+	                    className: classes,
+	                    errorText: this.state.errorMessage,
+	                    placeholder: this.props.placeholder,
 	                    onChange: this.handleChange,
 	                    onBlur: this.handleBlur,
 	                    type: this.props.type,
-	                    validate: this.props.validate,
 	                    value: this.state.value
-	                }),
-	                _react2.default.createElement(_InputError2.default, {
-	                    visible: this.state.errorVisible, errorMessage: this.state.errorMessage
 	                })
 	            );
 	        }
@@ -30450,7 +30466,7 @@
 	    var _this = _possibleConstructorReturn(this, (InputError.__proto__ || Object.getPrototypeOf(InputError)).call(this, props));
 
 	    _this.state = {
-	      message: _this.props.errorMessage || 'Invalid input'
+	      message: _this.props.errorMessage || ''
 	    };
 	    return _this;
 	  }

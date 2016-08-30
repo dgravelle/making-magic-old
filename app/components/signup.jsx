@@ -16,17 +16,22 @@ class SignupForm extends Component {
 
     }
 
-    validateEmail() {
-        let response = {};
+    validateEmail(email) {
+        var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
-        if (this.state.email === '') {
-            response.message = 'yo dont leave me hangin';
-            response.valid = false;
+        var response = {};
 
-            return response;
-        } else {
+        console.log(email.match(reg));
+
+        if (email.match(reg)) {
             response.valid = true;
             response.message = null;
+
+            return response;
+        }
+        else {
+            response.valid = false;
+            response.message = 'please provide a valid email'
 
             return response;
         }
@@ -34,16 +39,24 @@ class SignupForm extends Component {
 
 
     render() {
-        return <form>
-                <InputControl placeholder="Email" type="email" value={this.state.email} onBlur={this.validateEmail()}/>
+        return <form name="signup">
+                <InputControl
+                    id="email"
+                    placeholder="Email"
+                    type="email"
+                    validate={this.validateEmail}
+                />
                 <br/>
                 <InputControl
+                    id="password"
                     placeholder="Password"
+                    type="password"
                 />
                 <br/>
                 <RaisedButton
                     label="Signup"
-                    onClick="handleSubmit()"/>
+                    onClick={this.handleSubmit}
+                />
             </form>
     }
 }
@@ -53,6 +66,8 @@ SignupForm.propTypes = {
     initialPassword: React.PropTypes.string
 }
 
-SignupForm.defualtProps = {}
+SignupForm.defualtProps = {
+
+}
 
 export default SignupForm;
