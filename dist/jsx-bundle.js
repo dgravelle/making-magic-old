@@ -28663,9 +28663,21 @@
 
 	        var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this, props));
 
+	        _this.validateEmail = _this.validateEmail.bind(_this);
+	        _this.validatePassword = _this.validatePassword.bind(_this);
+	        _this.handleSubmit = _this.handleSubmit.bind(_this);
+
 	        _this.state = {
 	            email: props.initialEmail || 'your@email.com',
-	            password: props.initialPassword || 'password'
+	            password: props.initialPassword || 'password',
+	            valid: {
+	                email: false,
+	                password: false
+	            },
+	            errorMessage: {
+	                email: '',
+	                password: ''
+	            }
 	        };
 	        return _this;
 	    }
@@ -28674,48 +28686,68 @@
 	        key: 'handleSubmit',
 	        value: function handleSubmit() {}
 	    }, {
+	        key: 'validatePassword',
+	        value: function validatePassword(password) {
+	            var currentState = this.state;
+
+	            if (password.length < 6) {
+	                currentState.valid.password = false;
+	            } else {
+	                currentState.valid.password = true;
+	            }
+
+	            this.setState(currentState);
+	            console.log(this.state);
+	        }
+	    }, {
 	        key: 'validateEmail',
 	        value: function validateEmail(email) {
 	            var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
-	            var response = {};
-
-	            console.log(email.match(reg));
-
 	            if (email.match(reg)) {
-	                response.valid = true;
-	                response.message = null;
-
-	                return response;
+	                this.setState({
+	                    valid: {
+	                        email: true
+	                    }
+	                });
 	            } else {
-	                response.valid = false;
-	                response.message = 'please provide a valid email';
-
-	                return response;
+	                this.setState({
+	                    errorMessage: {
+	                        email: 'please input a valid email'
+	                    }
+	                });
 	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var isFormValid = this.state.valid.email && this.state.valid.password;
+
 	            return _react2.default.createElement(
 	                'form',
 	                { name: 'signup' },
 	                _react2.default.createElement(_InputControl2.default, {
 	                    id: 'email',
+	                    errorMessage: this.state.errorMessage.email,
 	                    placeholder: 'Email',
 	                    type: 'email',
+	                    valid: this.state.valid.email,
 	                    validate: this.validateEmail
 	                }),
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement(_InputControl2.default, {
 	                    id: 'password',
+	                    errorMessage: this.state.errorMessage.password,
 	                    placeholder: 'Password',
-	                    type: 'password'
+	                    type: 'password',
+	                    valid: this.state.valid.password,
+	                    validate: this.validatePassword
 	                }),
 	                _react2.default.createElement('br', null),
 	                _react2.default.createElement(_RaisedButton2.default, {
 	                    label: 'Signup',
-	                    onClick: this.handleSubmit
+	                    onClick: this.handleSubmit,
+	                    disabled: !isFormValid
 	                })
 	            );
 	        }
@@ -28753,10 +28785,6 @@
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
-	var _InputError = __webpack_require__(350);
-
-	var _InputError2 = _interopRequireDefault(_InputError);
-
 	var _classnames = __webpack_require__(351);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -28777,60 +28805,25 @@
 
 	        var _this = _possibleConstructorReturn(this, (InputControl.__proto__ || Object.getPrototypeOf(InputControl)).call(this, props));
 
-	        _this.state = {
-	            errorVisible: false,
-	            errorMessage: null,
-	            valid: true,
-	            value: props.initialValue
-	        };
-
-	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.handleBlur = _this.handleBlur.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(InputControl, [{
-	        key: 'handleChange',
-	        value: function handleChange(e) {
-	            this.setState({
-	                value: e.target.value
-	            });
-	        }
-	    }, {
 	        key: 'handleBlur',
 	        value: function handleBlur(e) {
-	            console.log(this.props);
 	            var valid = this.props.validate(e.target.value);
-
-	            console.log(valid);
-
-	            this.setState({
-	                errorVisible: valid.valid,
-	                errorMessage: valid.message
-	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var classes = (0, _classnames2.default)({
-	                'input-control': true,
-	                'has-error': this.state.valid
+	            return _react2.default.createElement(_TextField2.default, {
+	                id: this.props.id,
+	                errorText: this.props.errorMessage,
+	                placeholder: this.props.placeholder,
+	                onBlur: this.handleBlur,
+	                type: this.props.type
 	            });
-
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_TextField2.default, {
-	                    id: this.props.id,
-	                    className: classes,
-	                    errorText: this.state.errorMessage,
-	                    placeholder: this.props.placeholder,
-	                    onChange: this.handleChange,
-	                    onBlur: this.handleBlur,
-	                    type: this.props.type,
-	                    value: this.state.value
-	                })
-	            );
 	        }
 	    }]);
 
@@ -30430,75 +30423,7 @@
 	exports.default = TextFieldUnderline;
 
 /***/ },
-/* 350 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _classnames = __webpack_require__(351);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var InputError = function (_Component) {
-	  _inherits(InputError, _Component);
-
-	  function InputError(props) {
-	    _classCallCheck(this, InputError);
-
-	    var _this = _possibleConstructorReturn(this, (InputError.__proto__ || Object.getPrototypeOf(InputError)).call(this, props));
-
-	    _this.state = {
-	      message: _this.props.errorMessage || ''
-	    };
-	    return _this;
-	  }
-
-	  _createClass(InputError, [{
-	    key: 'render',
-	    value: function render() {
-	      var errorClass = (0, _classnames2.default)(this.props.className, {
-	        'error_container': true,
-	        'visible': this.props.visible,
-	        'invisible': !this.props.visible
-	      });
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: errorClass },
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          this.props.errorMessage,
-	          ' '
-	        )
-	      );
-	    }
-	  }]);
-
-	  return InputError;
-	}(_react.Component);
-
-	exports.default = InputError;
-
-/***/ },
+/* 350 */,
 /* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
