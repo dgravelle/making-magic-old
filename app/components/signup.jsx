@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import InputControl from './InputControl.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -37,9 +37,8 @@ class SignupForm extends Component {
         else {
             currentState.valid.password = true
         }
-        
+
         this.setState(currentState);
-        console.log(this.state);
     }
 
     validateEmail(email) {

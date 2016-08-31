@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import classNames from 'classnames';
 
