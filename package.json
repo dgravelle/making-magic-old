@@ -4,7 +4,8 @@
   "description": "a magic the gathering deck builder",
   "main": "server.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "start": "webpack-dev-server --inline --content-base . --history-api-fallback"
   },
   "author": "DG",
   "license": "ISC",
@@ -18,7 +19,9 @@
     "material-ui": "^0.15.4",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-router": "^2.7.0",
     "react-tap-event-plugin": "^1.0.0",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
   }
 }

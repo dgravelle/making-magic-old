@@ -22,7 +22,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <main id="dashboard">
+            <div id="dashboard">
                 <MainAppBar
                     toggleDrawer={this.toggleDrawer}
                 />
@@ -30,7 +30,10 @@ class Dashboard extends Component {
                     open={this.state.drawerOpen}
                     toggleDrawer={this.toggleDrawer}
                     />
-            </main>
+                <main>
+                    {this.props.children}
+                </main>
+            </div>
         )
     }
 }

@@ -5,7 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Search from 'material-ui/svg-icons/action/search';
 
 const green = {
-    'border-radius': '50%',
+    'borderRadius': '50%',
     'background' : 'rgba(172,211,172,1)',
     'color': 'black',
     padding: '4px'

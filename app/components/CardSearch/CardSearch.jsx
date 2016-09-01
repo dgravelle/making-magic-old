@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import SearchBar from './SearchBar.jsx';
 
 class CardSearch extends Component {
