@@ -1,32 +1,28 @@
 import React from 'react';
-// import EDHEditor from './EDHEditor.jsx';
+import EDHEditor from './EDHEditor.jsx';
 
 const testDeck = {
     id: 0,
     commander: '',
-    colors: [],
-    description: '',
-    title: ''
+    colors: ['g'],
+    description: 'test deck description',
+    title: 'test deck title',
+    list: []
 }
 
 class EDHEditorContainer extends React.Component {
     constructor() {
         super()
 
-        this.state({
-            deck: {
-                id: 0,
-                commander: '',
-                colors: [],
-                description: '',
-                title: ''
-            }
-        })
+        this.state ={
+            deck: testDeck
+        }
     }
 
     render() {
-        // return <EDHEditor deck={this.state.deck} />
-        return <p>EDH Container</p>
+        return (
+            <EDHEditor deck={this.state.deck} />
+        )
     }
 }
 

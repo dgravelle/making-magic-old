@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import InputControl from './InputControl.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class SignupForm extends Component {
+class SignupForm extends React.Component {
     constructor(props) {
         super(props)
 
@@ -11,17 +11,19 @@ class SignupForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            email: props.initialEmail || 'your@email.com',
-            password: props.initialPassword || 'password',
-            valid: {
-                email: false,
-                password: false
-            },
-            errorMessage: {
-                email: '',
-                password: ''
-            }
+            email: props.email,
+            password: props.password,
+            valid: props.valid,
+            errorMessage: props.errorMessage
         }
+    }
+
+    componentWillMount() {
+        console.log(this.state);
+    }
+
+    componentWillReceiveProps() {
+        console.log('mounted');
     }
 
     handleSubmit() {
@@ -42,7 +44,7 @@ class SignupForm extends Component {
     }
 
     validateEmail(email) {
-        var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+        // var reg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
         if (email.match(reg)) {
             this.setState({
@@ -95,12 +97,24 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-    initialEmail: React.PropTypes.string,
-    initialPassword: React.PropTypes.string
+    email: React.PropTypes.string,
+    password: React.PropTypes.string,
+    valid: React.PropTypes.object,
+    errorMessage: React.PropTypes.object
+
 }
 
-SignupForm.defualtProps = {
-
+SignupForm.defaultProps = {
+    email: 'your@email.com',
+    password: 'password',
+    valid: {
+        email: false,
+        password: false
+    },
+    errorMessage: {
+        email: '',
+        password: ''
+    }
 }
 
 export default SignupForm;

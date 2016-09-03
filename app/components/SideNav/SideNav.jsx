@@ -17,8 +17,9 @@ class SideNav extends Component {
                     <IconButton onClick={this.props.toggleDrawer}>>
                         <Clear />
                     </IconButton>
-                    <MenuItem><Link to="/decks">Decks</Link></MenuItem>
+                    <MenuItem><Link to="/">Decks</Link></MenuItem>
                     <MenuItem><Link to="/new">New</Link></MenuItem>
+                    <MenuItem><Link to="/signup">Signup</Link></MenuItem>
                 </Drawer>
             </nav>
         )

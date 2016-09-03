@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MainAppBar from '../MainAppBar/MainAppBar.jsx';
 import SideNav from '../SideNav/SideNav.jsx';
 
@@ -27,19 +28,22 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div id="dashboard">
-                <MainAppBar
-                    toggleDrawer={this.toggleDrawer}
-                />
-                <SideNav
-                    open={this.state.open}
-                    toggleDrawer={this.toggleDrawer}
-                    handleRequest={this.handleRequest}
+            <MuiThemeProvider>
+                <div id="dashboard">
+                    <MainAppBar
+                        toggleDrawer={this.toggleDrawer}
                     />
-                <main>
-                    {this.props.children}
-                </main>
-            </div>
+                    <SideNav
+                        open={this.state.open}
+                        toggleDrawer={this.toggleDrawer}
+                        handleRequest={this.handleRequest}
+                        />
+                    <main>
+                        <h1>Dashboard</h1>
+                        {this.props.children}
+                    </main>
+                </div>
+            </MuiThemeProvider>
         )
     }
 }
