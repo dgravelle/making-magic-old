@@ -10,11 +10,11 @@ class SideNav extends Component {
         return (
             <nav id="sideNav">
                 <Drawer
-                    docked={false}
+                    docked={true}
                     open={this.props.open}
                     onRequestChange={(open) => this.props.handleRequest(open)}
                 >
-                    <IconButton onClick={this.props.handleRequest}>>
+                    <IconButton onClick={this.props.toggleDrawer}>>
                         <Clear />
                     </IconButton>
                     <MenuItem><Link to="/decks">Decks</Link></MenuItem>
