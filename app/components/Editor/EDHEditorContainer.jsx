@@ -3,7 +3,7 @@ import EDHEditor from './EDHEditor.jsx';
 
 const testDeck = {
     id: 0,
-    commander: '',
+    commander: "Sigarda, Heron's Grace",
     colors: ['g'],
     description: 'test deck description',
     title: 'test deck title',

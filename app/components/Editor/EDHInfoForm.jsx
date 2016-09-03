@@ -50,7 +50,7 @@ class EDHInfoForm extends React.Component {
                     type="text"
                     onBlur={this.validateCommander}
                     defaultValue={this.props.deck.commander}
-                    errorText={this.state.commander.errorMessage}
+                    errorText={this.props.deck.commander.errorMessage}
                 />
                 <br/>
                 <InputControl

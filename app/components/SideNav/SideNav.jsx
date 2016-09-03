@@ -6,20 +6,31 @@ import IconButton from 'material-ui/IconButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 
 class SideNav extends Component {
+    componentWillMount() {
+        console.log(this.props);
+    }
+
     render() {
         return (
             <nav id="sideNav">
                 <Drawer
-                    docked={true}
+                    docked={false}
                     open={this.props.open}
                     onRequestChange={(open) => this.props.handleRequest(open)}
+                    onChange={() => console.log('change')}
                 >
                     <IconButton onClick={this.props.toggleDrawer}>>
                         <Clear />
                     </IconButton>
-                    <MenuItem><Link to="/">Decks</Link></MenuItem>
-                    <MenuItem><Link to="/new">New</Link></MenuItem>
-                    <MenuItem><Link to="/signup">Signup</Link></MenuItem>
+                    <Link to="/" onClick={this.props.toggleDrawer}>
+                        <MenuItem>Decks</MenuItem>
+                    </Link>
+                    <Link to="/new" onClick={this.props.toggleDrawer}>
+                        <MenuItem>New</MenuItem>
+                    </Link>
+                    <Link to="/signup" onClick={this.props.toggleDrawer}>
+                        <MenuItem>Signup</MenuItem>
+                    </Link>
                 </Drawer>
             </nav>
         )

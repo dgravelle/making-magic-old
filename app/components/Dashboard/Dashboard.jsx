@@ -7,15 +7,22 @@ class Dashboard extends Component {
     constructor(props) {
         super(props)
 
-        this.toggleDrawer = this.toggleDrawer.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleRequest = this.handleRequest.bind(this);
+        this.toggleDrawer = this.toggleDrawer.bind(this);
 
         this.state = {
             open: false
         }
     }
 
+    handleChange(e, key, payload) {
+        console.log('trying');
+        this.context.router.transitionTo(payload.route);
+    }
+
     handleRequest(open) {
+        console.log(open);
         this.setState({ open : open })
     }
 
@@ -34,12 +41,12 @@ class Dashboard extends Component {
                         toggleDrawer={this.toggleDrawer}
                     />
                     <SideNav
+                        onChange={this.handleChange}
                         open={this.state.open}
-                        toggleDrawer={this.toggleDrawer}
                         handleRequest={this.handleRequest}
+                        toggleDrawer={this.toggleDrawer}
                         />
                     <main>
-                        <h1>Dashboard</h1>
                         {this.props.children}
                     </main>
                 </div>

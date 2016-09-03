@@ -15,8 +15,8 @@ class EDHEditor extends React.Component {
                 <Tab label="editDeckList">
                     <p>editDeckList</p>
                 </Tab>
-                <Tab label="deckList">
-                    <p>DeckList</p>
+                <Tab label="deckStats">
+                    <p>Deck Stats</p>
                 </Tab>
             </Tabs>
         )
