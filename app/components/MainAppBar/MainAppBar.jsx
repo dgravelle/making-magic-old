@@ -6,11 +6,13 @@ class MainAppBar extends Component {
 
     render() {
         return (
-            <AppBar
-                title="Making Magic"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-                onLeftIconButtonTouchTap={this.props.toggleDrawer}
-            />
+            <header>
+                <AppBar
+                    title="Making Magic"
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    onLeftIconButtonTouchTap={this.props.toggleDrawer}
+                />
+            </header>
         )
     }
 }

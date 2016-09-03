@@ -5,6 +5,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import DeckEditor from './components/CardSearch/CardSearch.jsx';
+import EDHEditorContainer from './components/Editor/EDHEditorContainer.jsx';
+import AllDecks from './components/Decks/AllDecks.jsx';
+import SignupForm from './components/Signup.jsx';
 
 injectTapEventPlugin()
 
@@ -14,10 +17,9 @@ class App extends Component {
             <MuiThemeProvider>
                 <Router history={browserHistory}>
                     <Route path="/" component={Dashboard}>
-                        <Route path="/decks" component={DeckEditor}>
-                            {/* <Route to="/decks/:deckName" component={Deck} />
-                            <Route to="/decks/:deckName/:edit" component={DeckEditor} /> */}
-                        </Route>
+                        <IndexRoute component={AllDecks}/>
+                        <Route path="/decks" component={DeckEditor} />
+                        <Route path="/new" component={SignupForm} />
                     </Route>
                 </Router>
             </MuiThemeProvider>
@@ -26,4 +28,4 @@ class App extends Component {
 }
 
 render(
-    <App/>, document.getElementById('app'))
+    <App/>, document.getElementById('app'));

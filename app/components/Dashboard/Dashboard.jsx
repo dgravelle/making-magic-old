@@ -7,15 +7,20 @@ class Dashboard extends Component {
         super(props)
 
         this.toggleDrawer = this.toggleDrawer.bind(this);
+        this.handleRequest = this.handleRequest.bind(this);
 
         this.state = {
-            drawerOpen: false
+            open: false
         }
+    }
+
+    handleRequest(open) {
+        this.setState({ open : open })
     }
 
     toggleDrawer() {
         let currentState = this.state;
-        currentState.drawerOpen = !currentState.drawerOpen;
+        currentState.open = !currentState.open;
 
         this.setState(currentState);
     }
@@ -27,8 +32,9 @@ class Dashboard extends Component {
                     toggleDrawer={this.toggleDrawer}
                 />
                 <SideNav
-                    open={this.state.drawerOpen}
+                    open={this.state.open}
                     toggleDrawer={this.toggleDrawer}
+                    handleRequest={this.handleRequest}
                     />
                 <main>
                     {this.props.children}
