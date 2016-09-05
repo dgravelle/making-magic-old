@@ -11,20 +11,14 @@ import Signup from './components/Signup.jsx';
 
 injectTapEventPlugin()
 
-class NewPage extends Component {
-    render() {
-        return <h1>New Page</h1>
-    }
-}
-
 class App extends Component {
     render() {
         return (
             <Router history={browserHistory}>
                 <Route path="/" component={Dashboard}>
-                    <IndexRoute component={AllDecks}/>
-                    <Route path="new" component={EDHEditorContainer} />
-                    <Route path="signup" component={Signup} />
+                    <IndexRoute component={Signup} />
+                    <Route path="/decks" component={AllDecks}/>
+                    <Route path="/new" component={EDHEditorContainer} />
                 </Route>
             </Router>
         )
