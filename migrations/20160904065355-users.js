@@ -10,10 +10,21 @@ module.exports = {
           type: Sequelize.INTEGER
         },
         username: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            unique: true
         },
         email: {
             type: Sequelize.STRING
+        },
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
         }
     });
   },

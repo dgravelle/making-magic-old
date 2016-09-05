@@ -7,6 +7,8 @@ module.exports = function(sequelize, DataTypes) {
     format: DataTypes.STRING,
     description: DataTypes.String,
     colors: DataTypes.ARRAY(Sequelize.TEXT)
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   });
   return decks;
 };

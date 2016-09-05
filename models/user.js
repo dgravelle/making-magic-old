@@ -4,7 +4,9 @@ export default (sequelize, DataTypes) => {
     let User = sequelize.define('User', {
         id: DataTypes.UUID,
         username: DataTypes.STRING,
-        email: DataTypes.STRING
+        email: DataTypes.STRING,
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     },
     {
         classMethods: {

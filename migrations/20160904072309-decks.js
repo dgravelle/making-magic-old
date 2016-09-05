@@ -22,13 +22,25 @@ module.exports = {
           allowNull: false,
           type: Sequelize.STRING
       },
+      format: {
+          allowNull: false,
+          type: Sequelize.STRING
+      },
+      description: {
+          type: Sequelize.STRING
+      },
+      colors: {
+          type: Sequelize.ARRAY(Sequelize.TEXT)
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       }
     });
   },
