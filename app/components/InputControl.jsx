@@ -9,7 +9,6 @@ class InputControl extends Component {
     }
 
     handleBlur(e) {
-        console.log('tyring');
         let valid = this.props.validate(e.target.value);
     }
 

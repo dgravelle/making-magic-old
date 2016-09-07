@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('decks', {
+    return queryInterface.createTable('Decks', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,7 +11,7 @@ module.exports = {
       },
       user_id: {
           references: {
-                model: 'users',
+                model: 'Users',
                 key: 'id'
             },
             onUpdate: 'cascade',

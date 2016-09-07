@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.log('error here');
+    console.log('error, sorry');
     res.status(err.status || 500);
     res.send(err.message)
 });

@@ -12,17 +12,21 @@ class Dashboard extends Component {
         this.toggleDrawer = this.toggleDrawer.bind(this);
 
         this.state = {
-            open: false
+            open: false,
+            userName: '',
+            email: ''
         }
     }
 
+    componentDidMount() {
+        
+    }
+
     handleChange(e, key, payload) {
-        console.log('trying');
         this.context.router.transitionTo(payload.route);
     }
 
     handleRequest(open) {
-        console.log(open);
         this.setState({ open : open })
     }
 
