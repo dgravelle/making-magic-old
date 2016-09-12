@@ -13,6 +13,7 @@ class AllDecksContainer extends React.Component {
     componentDidMount() {
         var userId = 1
         $.get('http://localhost:3000/decks/' + userId, result => {
+            console.log(decks);
             var decks = result;
             this.setState({ decks: decks });
         });

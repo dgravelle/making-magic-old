@@ -17,8 +17,8 @@ class App extends Component {
             <Router history={browserHistory}>
                 <Route path="/" component={Dashboard}>
                     <IndexRoute component={Signup} />
-                    <Route path="/decks" component={AllDecks}/>
-                    <Route path="/new" component={EDHEditorContainer} />
+                    <Route path="decks" component={AllDecks} />
+                    <Route path="new" component={CardSearch} />
                 </Route>
             </Router>
         )
