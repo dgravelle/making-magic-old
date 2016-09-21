@@ -7,8 +7,10 @@ class CardSearch extends Component {
     constructor(props) {
         super(props)
 
-        this.handleSelection = this.handleSelection.bind(this);
-        this.searchInColors = this.searchInColors.bind(this);
+        this.search = this.search.bind(this);
+        this.toggleColor = this.toggleColor.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
+
 
         this.state = {
             colors: {
@@ -22,28 +24,57 @@ class CardSearch extends Component {
             results: []
         }
     }
-    
-    handleSelection(event, index, value) {
-        console.log(value);
-        this.searchInColors(value)
-        // this.setState({colors: value});
+
+    updateQuery(e) {
+        let newState = this.state
+        newState.query = e.target.value;
+
+        this.setState(newState);
     }
 
-    searchInColors(colors) {
+    toggleColor(e) {
+        let val = e.target.value;
+        let currentState = this.state;
 
+        currentState.colors[val] = !currentState.colors[val];
 
-        $.get('https://api.magicthegathering.io/v1/cards?colors=' + colors + '&page=1&pageSize=50', cards => {
+        this.setState(currentState);
+    }
+
+    search(e) {
+        e.preventDefault();
+        console.log(e);
+        console.log(this.state);
+
+        let colors = this.state.colors;
+        let query = ''
+
+        for (let i in colors) {
+            if (colors[i]) {
+                if (query.length > 0) {
+                    query+= `,${i}`;
+                }
+                else {
+                    query = `${i}`;
+                }
+            }
+        }
+
+        console.log(`https://api.magicthegathering.io/v1/cards?colors="${query}"`);
+
+        let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${query}"`
+
+        $.get(apiUrl, cards => {
 
             var results = [];
 
             cards.cards.map(card => {
-                if(card.colors.includes('Green') || card.colors.includes('Black') || card.colors.includes('Red')) {
+                if (!card.imageUrl)
+                    // card.imageUrl = `http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${card.multiverseid}&type=card`
+                    console.log(card);
+                
+                results.push(card);
 
-                }
-                else {
-                    // console.log(card);
-                    results.push(card);
-                }
             });
             console.log('results',results);
             this.setState({ results: results });
@@ -52,10 +83,19 @@ class CardSearch extends Component {
 
     render() {
         return (
-            <div className="card-search">
-                <SearchBar handleSelection={this.handleSelection}/>
+            <form
+                id="cardSearch"
+                className="card-search"
+                onSubmit={this.search}
+                name="cardSearch"
+                noValidate>
+                <SearchBar
+                    search={this.search}
+                    toggle={this.toggleColor}
+                    updateQuery={this.updateQuery}
+                    />
                 <SearchResults results={this.state.results} />
-            </div>
+            </form>
         )
     }
 }

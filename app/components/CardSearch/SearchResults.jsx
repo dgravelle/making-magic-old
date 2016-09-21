@@ -7,14 +7,6 @@ class SearchResults extends React.Component {
 
     }
 
-    componentWillMount() {
-        console.log('mounting');
-    }
-
-    componentWillReceiveProps(props) {
-        console.log('props received', props);
-    }
-
     render() {
         let results = [];
 
