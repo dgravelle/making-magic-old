@@ -3,10 +3,11 @@ import {render} from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
-import DeckEditor from './components/CardSearch/CardSearch.jsx';
+// import DeckEditor from './components/CardSearch/CardSearch.jsx';
 import EDHEditorContainer from './components/Editor/EDHEditorContainer.jsx';
 import AllDecks from './components/Decks/AllDecks.jsx';
 import CardSearch from './components/CardSearch/CardSearch.jsx';
+import DeckEditor from './components/DeckEditor/DeckEditor.jsx';
 import Signup from './components/Signup.jsx';
 
 injectTapEventPlugin()
@@ -18,7 +19,7 @@ class App extends Component {
                 <Route path="/" component={Dashboard}>
                     <IndexRoute component={Signup} />
                     <Route path="decks" component={AllDecks} />
-                    <Route path="new" component={CardSearch} />
+                    <Route path="new" component={DeckEditor} />
                 </Route>
             </Router>
         )

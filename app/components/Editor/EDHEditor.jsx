@@ -3,8 +3,6 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import InfoForm from './EDHInfoForm.jsx';
 
 class EDHEditor extends React.Component {
-    componentWillMount() {
-    }
 
     render() {
         return (

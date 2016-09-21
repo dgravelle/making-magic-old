@@ -2,18 +2,22 @@ import React from 'react';
 
 const styles = {
     'card-container': {
-        display: 'flex'
+        display: 'flex',
+        'flexDirection': 'column'
     }
 }
 
 class CardDisplay extends React.Component {
     constructor(props) {
         super(props)
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    componentWillReceiveProps(props) {
-        console.log('card props', props);
+    handleClick() {
+        this.props.add(this.props)
     }
+
 
     render() {
         return (
@@ -25,8 +29,11 @@ class CardDisplay extends React.Component {
                 <div className="card-info">
                     <h3 className="card-info__name">  {this.props.name}</h3>
                     <p className="card-info__text">{this.props.text}</p>
-                </div>
 
+                </div>
+                <div className="card-info__action">
+                    <button onClick={this.handleClick}>+</button>
+                </div>
             </div>
         )
     }

@@ -5,7 +5,7 @@ const models = require('../models');
 router.get('/:id', (req, res, next) => {
     var id = req.params.id;
 
-    models.User.find({
+    models.User.find({ 
         where: {
             'id': id
         }

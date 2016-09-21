@@ -3,6 +3,12 @@ import $ from 'jquery';
 import SearchBar from './SearchBar.jsx';
 import SearchResults from './SearchResults.jsx';
 
+const style = {
+    'card-search-container' : {
+        // display: 'flex',
+    }
+}
+
 class CardSearch extends Component {
     constructor(props) {
         super(props)
@@ -11,6 +17,7 @@ class CardSearch extends Component {
         this.toggleColor = this.toggleColor.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
 
+        // console.log('card search props',this.props);
 
         this.state = {
             colors: {
@@ -43,40 +50,38 @@ class CardSearch extends Component {
 
     search(e) {
         e.preventDefault();
-        console.log(e);
-        console.log(this.state);
 
         let colors = this.state.colors;
-        let query = ''
+        let colorQuery = ''
 
         for (let i in colors) {
             if (colors[i]) {
-                if (query.length > 0) {
-                    query+= `,${i}`;
+                if (colorQuery.length > 0) {
+                    colorQuery+= `,${i}`;
                 }
                 else {
-                    query = `${i}`;
+                    colorQuery = `${i}`;
                 }
             }
         }
 
-        console.log(`https://api.magicthegathering.io/v1/cards?colors="${query}"`);
 
-        let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${query}"`
+        let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${colorQuery}"`
 
         $.get(apiUrl, cards => {
 
             var results = [];
 
+            // console.log(cards);
+
             cards.cards.map(card => {
-                if (!card.imageUrl)
+                // if (!card.imageUrl)
                     // card.imageUrl = `http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${card.multiverseid}&type=card`
-                    console.log(card);
-                
+
                 results.push(card);
 
             });
-            console.log('results',results);
+
             this.setState({ results: results });
         });
     }
@@ -88,13 +93,17 @@ class CardSearch extends Component {
                 className="card-search"
                 onSubmit={this.search}
                 name="cardSearch"
-                noValidate>
+                noValidate
+                style={style['card-search-container']}
+                >
                 <SearchBar
                     search={this.search}
                     toggle={this.toggleColor}
                     updateQuery={this.updateQuery}
                     />
-                <SearchResults results={this.state.results} />
+                <SearchResults
+                    add={this.props.addToDeck}
+                    results={this.state.results} />
             </form>
         )
     }

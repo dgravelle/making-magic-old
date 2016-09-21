@@ -65,39 +65,39 @@ class SearchBar extends Component {
                             }
                             onCheck={this.props.toggle}
                             style={checkStyle}
-                            />
-                            <Checkbox
-                                value="blue"
-                                label={
-                                    <i className="ms ms-u" style={blue}></i>
-                                }
-                                onCheck={this.props.toggle}
-                                style={checkStyle}
-                                />
-                            <Checkbox
-                                value="black"
-                                label={
-                                    <i className="ms ms-b" style={black}></i>
-                                }
-                                onCheck={this.props.toggle}
-                                style={checkStyle}
-                                />
-                            <Checkbox
-                                value="red"
-                                label={
-                                    <i className="ms ms-r" style={red}></i>
-                                }
-                                onCheck={this.props.toggle}
-                                style={checkStyle}
-                                />
-                            <Checkbox
-                                value="green"
-                                label={
-                                    <i className="ms ms-g" style={green}></i>
-                                }
-                                onCheck={this.props.toggle}
-                                style={checkStyle}
-                                />
+                        />
+                        <Checkbox
+                            value="blue"
+                            label={
+                                <i className="ms ms-u" style={blue}></i>
+                            }
+                            onCheck={this.props.toggle}
+                            style={checkStyle}
+                        />
+                        <Checkbox
+                            value="black"
+                            label={
+                                <i className="ms ms-b" style={black}></i>
+                            }
+                            onCheck={this.props.toggle}
+                            style={checkStyle}
+                        />
+                        <Checkbox
+                            value="red"
+                            label={
+                                <i className="ms ms-r" style={red}></i>
+                            }
+                            onCheck={this.props.toggle}
+                            style={checkStyle}
+                        />
+                        <Checkbox
+                            value="green"
+                            label={
+                                <i className="ms ms-g" style={green}></i>
+                            }
+                            onCheck={this.props.toggle}
+                            style={checkStyle}
+                        />
                     </ToolbarGroup>
                 </Toolbar>
             </div>
