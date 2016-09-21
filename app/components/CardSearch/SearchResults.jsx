@@ -21,12 +21,10 @@ class SearchResults extends React.Component {
             <div className="results-container">
                 {this.props.results.map(card => {
                     return (
-                        <CardDisplay key={card.id}
-                            name={card.name}
-                            manaCoast={card.manaCoast}
-                            imageUrl={card.imageUrl}
-                            text={card.text}
-                            add={this.addToDeck.bind(card)}
+                        <CardDisplay
+                            key={card.id}
+                            card={card}
+                            add={this.addToDeck}
                         />
                     )
                 })}
