@@ -34,7 +34,7 @@ class CardDisplay extends React.Component {
 
                 </div>
                 <div className="card-info__action">
-                    <button onClick={this.handleClick.bind(this.props.card)}>+</button>
+                    <button onClick={this.handleClick}>+</button>
                 </div>
             </div>
         )

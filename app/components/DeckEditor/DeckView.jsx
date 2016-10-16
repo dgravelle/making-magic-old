@@ -13,8 +13,6 @@ class DeckView extends React.Component {
             cards.push(<li key={card.id}>{card.name}</li>);
         })
 
-        console.log(cards[0]);
-
         return(
             <div className="deck-view-container">
                 <ul>

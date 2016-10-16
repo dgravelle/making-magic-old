@@ -2,6 +2,15 @@ import React from 'react';
 import CardSearch from '../CardSearch/CardSearch.jsx';
 import DeckView from './DeckView.jsx'
 
+const styles = {
+    row: {
+        'display': 'flex'
+    },
+    col: {
+        'flex': '1'
+    }
+}
+
 class DeckBuilderContainer extends React.Component {
     constructor() {
         super()
@@ -54,11 +63,19 @@ class DeckBuilderContainer extends React.Component {
 
     render() {
         return(
-            <main className="deckbuilder-container">
-                <CardSearch
-                    addToDeck={this.add}
-                    />
-                <DeckView deckList={this.state.deckList}/>
+            <main className="deckbuilder-container" style={styles.row}>
+                <section style={styles.col}>
+                    <CardSearch
+                        addToDeck={this.add}
+
+                        />
+                </section>
+                <section style={styles.col}>
+                    <DeckView
+                        deckList={this.state.deckList}
+                        styles={styles.col}
+                        />
+                </section>
             </main>
         )
     }

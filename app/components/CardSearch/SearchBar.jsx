@@ -34,7 +34,7 @@ green.background = 'rgba(172,211,172,1)';
 
 const checkStyle = {
     marginBottom: 16,
-    width: '30%'
+    width: 'auto'
 };
 
 
@@ -48,7 +48,8 @@ class SearchBar extends Component {
         return (
             <div className="search-options">
                 <TextField
-                    id="search"
+                    id="searchText"
+                    name="searchText"
                     type="text"
                     onChange={this.props.updateQuery}
                 />
@@ -56,7 +57,26 @@ class SearchBar extends Component {
                     <Search />
                 </IconButton>
                 <br/>
-                <Toolbar>
+                <Toolbar className="text-options">
+                    <ToolbarGroup>
+                        <Checkbox
+                            value="name"
+                            label="Name"
+                            onCheck={this.props.updateTextOptions}
+                        />
+                        <Checkbox
+                            value="subtypes"
+                            label="Subtype"
+                            onCheck={this.props.updateTextOptions}
+                        />
+                        <Checkbox
+                            value="text"
+                            label="Text"
+                            onCheck={this.props.updateTextOptions}
+                        />
+                    </ToolbarGroup>
+                </Toolbar>
+                <Toolbar className="color-options">
                     <ToolbarGroup firstChild={true}>
                         <Checkbox
                             value="white"

@@ -16,8 +16,7 @@ class CardSearch extends Component {
         this.search = this.search.bind(this);
         this.toggleColor = this.toggleColor.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
-
-        // console.log('card search props',this.props);
+        this.updateTextOptions = this.updateTextOptions.bind(this);
 
         this.state = {
             colors: {
@@ -27,16 +26,37 @@ class CardSearch extends Component {
                 red: false,
                 green: false
             },
+            textOptions: {
+                name: false,
+                type: false,
+                text: false
+            },
             query: '',
             results: []
         }
     }
 
     updateQuery(e) {
+        console.log('updating');
         let newState = this.state
         newState.query = e.target.value;
 
+        console.log(newState);
+
         this.setState(newState);
+    }
+
+    updateTextOptions(e) {
+        console.log(e.target.value);
+
+        let opt = e.target.value
+        let newState = this.state
+
+        newState.textOptions[opt] = !newState.textOptions[opt];
+
+        console.log(this.state.textOptions);
+        this.setState(newState);
+
     }
 
     toggleColor(e) {
@@ -52,31 +72,42 @@ class CardSearch extends Component {
         e.preventDefault();
 
         let colors = this.state.colors;
-        let colorQuery = ''
+        let textOptions = this.state.textOptions;
+        let colorQuery = '';
+        let textOptionsQuery = '';
+        let query = this.state.query;
 
         for (let i in colors) {
-            if (colors[i]) {
-                if (colorQuery.length > 0) {
-                    colorQuery+= `,${i}`;
-                }
-                else {
-                    colorQuery = `${i}`;
+            if (colors.hasOwnProperty(i)) {
+                if (colors[i]) {
+                    if (colorQuery.length > 0) {
+                        colorQuery += `,${i}`;
+                    }
+                    else {
+                        colorQuery = `${i}`;
+                    }
                 }
             }
         }
 
 
-        let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${colorQuery}"`
+        for (let i in textOptions) {
+            if (textOptions.hasOwnProperty(i)) {
+                if(textOptions[i]) {
+                    textOptionsQuery += `&${i}=${query}`;
+                }
+            }
+        }
+
+        let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${colorQuery}"${textOptionsQuery}&pageSize=10`;
+
+        console.log(apiUrl);
 
         $.get(apiUrl, cards => {
 
             var results = [];
 
-            // console.log(cards);
-
             cards.cards.map(card => {
-                // if (!card.imageUrl)
-                    // card.imageUrl = `http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${card.multiverseid}&type=card`
 
                 results.push(card);
 
@@ -100,6 +131,7 @@ class CardSearch extends Component {
                     search={this.search}
                     toggle={this.toggleColor}
                     updateQuery={this.updateQuery}
+                    updateTextOptions={this.updateTextOptions}
                     />
                 <SearchResults
                     add={this.props.addToDeck}
