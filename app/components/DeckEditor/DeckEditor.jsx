@@ -26,7 +26,7 @@ class DeckBuilderContainer extends React.Component {
 
     isCardDupe(card) {
         let newState = this.state;
-        console.log(`checking for dupe: ${card}`);
+
         if (newState.deckList.length < 1)
             return false;
 
@@ -46,7 +46,6 @@ class DeckBuilderContainer extends React.Component {
 
     add(card) {
         let newState = this.state;
-        console.log(newState);
         if (!this.isCardDupe(card)) {
             newState.deckList.push(card);
         }
