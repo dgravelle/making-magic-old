@@ -4,35 +4,33 @@ class DeckView extends React.Component {
     constructor(props) {
         super(props)
 
-        this.sortDeck = this.sortDeck.bind(this);
-
+        this.state = {
+            sort: {}
+        }
     }
 
-    sortDeck() {
-        let sort = {
-            land: [],
-            artifact: [],
-            creature: [],
-            enchantment: [],
-            spell: []
-        }
+    componentWillReceiveProps() {
+        let currentSort = this.state;
 
         this.props.deckList.forEach(card => {
-            console.log('card types',card.types);
-            card.types.forEach(type => {
-                console.log(sort[type.toLowerCase()]);
-                sort[type.toLowerCase()].push(card);
-                console.log('sort',sort);
-            })
+            card.types.forEach(i => {
+                let type = i.toLowerCase();
+
+                if (!currentSort.sort.hasOwnProperty(type))
+                    currentSort.sort[type] = [];
+
+                if(!currentSort.sort[type].includes(card))
+                    currentSort.sort[type].push(card);
+            });
         });
 
-        return sort;
+        this.setState(currentSort);
     }
 
-    render() {
-        let allCards = []
 
-        let types = this.sortDeck();
+    render() {
+        let allCards = [];
+        let types = this.state.sort;
 
         for (let type in types) {
             let cards = [];
@@ -40,11 +38,17 @@ class DeckView extends React.Component {
                 cards.push(<li key={card.id}>{card.name}</li>);
             })
 
-            allCards.push(<ul>{cards}</ul>);
+            allCards.push(
+                <div key={type} className="accordion">
+                    <div className="accordion-title">
+                        <span>{type}</span>
+                    </div>
+                    <div className="accordion-title">
+                        <ul>{cards}</ul>
+                    </div>
+                </div>
+            );
         }
-
-
-
 
         return(
             <div className="deck-view-container">

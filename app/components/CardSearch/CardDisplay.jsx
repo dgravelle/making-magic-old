@@ -3,15 +3,13 @@ import React from 'react';
 const styles = {
     'card-container': {
         display: 'flex',
-        'flexDirection': 'column'
+        'flexDirection': 'row'
     }
 }
 
 class CardDisplay extends React.Component {
     constructor(props) {
         super(props)
-
-        console.log(this.props);
 
         this.handleClick = this.handleClick.bind(this);
     }

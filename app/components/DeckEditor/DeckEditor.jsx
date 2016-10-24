@@ -34,7 +34,6 @@ class DeckBuilderContainer extends React.Component {
         let dupe = false;
 
         for (var i = 0; i < deckList.length; i++) {
-            console.log(deckList[i]);
             if(card.id === deckList[i].id) {
                 dupe = true;
                 return dupe
@@ -48,16 +47,11 @@ class DeckBuilderContainer extends React.Component {
         let newState = this.state;
         if (!this.isCardDupe(card)) {
             newState.deckList.push(card);
+            this.setState(newState);
         }
         else {
             alert(`you've already got ${card.name} in your deck.`)
         }
-
-        console.log(newState.deckList);
-
-        this.setState(newState);
-
-
     }
 
     render() {

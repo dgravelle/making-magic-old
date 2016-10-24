@@ -5,7 +5,8 @@ import SearchResults from './SearchResults.jsx';
 
 const style = {
     'card-search-container' : {
-        // display: 'flex',
+        display: 'flex',
+        flexDirection: 'column'
     }
 }
 
@@ -37,24 +38,18 @@ class CardSearch extends Component {
     }
 
     updateQuery(e) {
-        console.log('updating');
         let newState = this.state
         newState.query = e.target.value;
-
-        console.log(newState);
 
         this.setState(newState);
     }
 
     updateTextOptions(e) {
-        console.log(e.target.value);
-
         let opt = e.target.value
         let newState = this.state
 
         newState.textOptions[opt] = !newState.textOptions[opt];
 
-        console.log(this.state.textOptions);
         this.setState(newState);
 
     }
@@ -100,8 +95,6 @@ class CardSearch extends Component {
         }
 
         let apiUrl = `https://api.magicthegathering.io/v1/cards?colors="${colorQuery}"${textOptionsQuery}&pageSize=10`;
-
-        console.log(apiUrl);
 
         $.get(apiUrl, cards => {
 
